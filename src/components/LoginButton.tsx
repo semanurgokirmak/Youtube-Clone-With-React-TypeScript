@@ -11,12 +11,13 @@ const LoginButton: React.FC = () => {
       if (token) {
         localStorage.setItem("google_access_token", token);
         setIsLoggedIn(true);
-        console.log("Login successful, token saved.");
-        console.log("Access Token:", token);
+        console.log("Login successful");
       }
     },
     onError: () => {
-      console.log("Login failed.");
+      localStorage.removeItem("google_access_token");
+      setIsLoggedIn(false);
+      console.log("Login failed");
     },
     scope:
       "https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl",
@@ -25,7 +26,7 @@ const LoginButton: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem("google_access_token");
     setIsLoggedIn(false);
-    console.log("Logged out.");
+    console.log("Logged out");
   };
 
   return (
